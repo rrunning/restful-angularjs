@@ -1,0 +1,36 @@
+<navbar></navbar>
+<h1>{{ $ctrl.name }}</h1>
+<main>
+  <div>
+    <h1>To-Do List</h1>
+    <button ng-click="$ctrl.cancelEdit()">Cancel Edit</button>
+    <table>
+      <tr>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Delete</th>
+        <th>Edit</th>
+      </tr>
+      <tr ng-repeat="item in $ctrl.listItems">
+        <td>
+          <span ng-hide="$ctrl.editMode === item.id">{{ item.title }}</span>
+          <input type="text" name="edit" ng-model="$ctrl.currentItem.title" ng-show="$ctrl.editMode === item.id">
+        </td>
+        <td>
+          <span ng-hide="$ctrl.editMode === item.id">{{ item.description }}</span>
+          <input type="text" name="edit" ng-model="$ctrl.currentItem.description" ng-show="$ctrl.editMode === item.id">
+        </td>
+        <td>
+          <button ng-click="$ctrl.remove(item.id)">Delete</button>
+        </td>
+        <td>
+          <button ng-click="$ctrl.setEdit(item)" ng-hide="$ctrl.editMode === item.id">Edit</button>
+          <button ng-click="$ctrl.saveEdit(item.id)" ng-show="$ctrl.editMode === item.id">Save</button>
+        </td>
+      </tr>
+    </table>
+    <input type="text" name="title" placeholder="Title" ng-model="$ctrl.itemInput.title">
+    <input type="text" name="description" placeholder="Description" ng-model="$ctrl.itemInput.description">
+    <input type="submit" ng-click="$ctrl.addToList()">
+  </div>
+</main>
